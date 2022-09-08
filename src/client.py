@@ -21,7 +21,7 @@ pprint(raw_mapping)
 mapping = mapping_decoder(raw_mapping)
 pprint(mapping)
 
-index, size = 0, 5
+index, size = 0, 2
 client = ModbusTcpClient(host="localhost", port=5020)
 
 # print("HR")
@@ -29,7 +29,7 @@ client = ModbusTcpClient(host="localhost", port=5020)
 # pprint(response)
 
 print("HR")
-response = client.read_holding_registers(index, size)
+response = client.read_holding_registers(address=index, count=size)
 pprint(response)
 # print("IR")
 # response = client.read_input_registers(index, size)

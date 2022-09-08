@@ -162,8 +162,7 @@ def modbus_context_decoder(mapping_blocks):
     :param mapping_blocks: The mapping blocks
     :returns: The initialized modbus slave context
     """
-    blocks = defaultdict(dict)
-    # basemod = BaseModbusDataBlock()
+    # blocks = defaultdict(dict)
     sparse = ModbusSparseDataBlock()
     sparse.create()
     for block in mapping_blocks.items():
@@ -174,12 +173,12 @@ def modbus_context_decoder(mapping_blocks):
                 address = mapping["address"]
                 # function = mapping["function"]
                 # blocks[function][address] = value
-                blocks[address] = value
-                sparse.setValues(1, [10]*5)
+                # blocks[address] = value
+                # sparse.setValues(address=0, values=[10] * 5)
+                sparse.setValues(address=int(address), values=int(value))
                 # print(mapping)
-    print(type(blocks))
-    print(blocks)
-    # print(sparse.getValues(1))
+    # print(type(blocks))
+    # print(blocks)
     # datablocks = ModbusSparseDataBlock(blocks)
     # print(datablocks)
     return ModbusSlaveContext(hr=sparse)

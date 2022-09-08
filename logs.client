@@ -1,0 +1,25 @@
+defaultdict(<class 'dict'>,
+            {'1': {'address': '1',
+                   'function': 'hr',
+                   'name': 'Comm. count PLC',
+                   'size': '2',
+                   'type': 'int16'}})
+None
+2022-09-08 13:35:23,592 DEBUG    sync           :218      Connection to Modbus server established. Socket ('127.0.0.1', 46073)
+2022-09-08 13:35:23,592 DEBUG    transaction    :127      Current transaction state - IDLE
+2022-09-08 13:35:23,592 DEBUG    transaction    :131      Running transaction 1
+2022-09-08 13:35:23,592 DEBUG    transaction    :283      SEND: 0x0 0x1 0x0 0x0 0x0 0x6 0x0 0x3 0x0 0x0 0x0 0x1
+2022-09-08 13:35:23,592 DEBUG    sync           :77       New Transaction state "SENDING"
+2022-09-08 13:35:23,592 DEBUG    transaction    :304      Changing transaction state from "SENDING" to "WAITING FOR REPLY"
+2022-09-08 13:35:23,594 DEBUG    transaction    :408      Changing transaction state from "WAITING FOR REPLY" to "PROCESSING REPLY"
+2022-09-08 13:35:23,594 DEBUG    transaction    :319      RECV: 0x0 0x1 0x0 0x0 0x0 0x3 0x0 0x83 0x4
+2022-09-08 13:35:23,594 DEBUG    socket_framer  :165      Processing: 0x0 0x1 0x0 0x0 0x0 0x3 0x0 0x83 0x4
+2022-09-08 13:35:23,594 DEBUG    factory        :347      Factory Response[131]
+2022-09-08 13:35:23,594 DEBUG    transaction    :495      Adding transaction 1
+2022-09-08 13:35:23,594 DEBUG    transaction    :507      Getting transaction 1
+2022-09-08 13:35:23,594 DEBUG    transaction    :229      Changing transaction state from "PROCESSING REPLY" to "TRANSACTION_COMPLETE"
+<pymodbus.pdu.ExceptionResponse object at 0x7f3ca7cb31f0>
+Traceback (most recent call last):
+  File "/home/pedro/Pedro/Projects/pymodbus_mapper/src/client.py", line 30, in <module>
+    response.registers, byteorder=Endian.Big, wordorder=Endian.Big
+AttributeError: 'ExceptionResponse' object has no attribute 'registers

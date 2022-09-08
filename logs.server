@@ -1,0 +1,32 @@
+raw_mapping
+defaultdict(<class 'dict'>,
+            {'1': {'address': '1',
+                   'description': 'Comm. count PLC',
+                   'function': 'hr',
+                   'name': 'Comm. count PLC',
+                   'value': '1'}})
+slave_context.store
+{'c': <pymodbus.datastore.store.ModbusSequentialDataBlock object at 0x7fde0e856c50>,
+ 'd': <pymodbus.datastore.store.ModbusSequentialDataBlock object at 0x7fde0e856b00>,
+ 'h': {'1': '1'},
+ 'i': <pymodbus.datastore.store.ModbusSequentialDataBlock object at 0x7fde0e856e90>}
+2022-09-08 13:35:23,592 DEBUG    sync           :372      Started thread to serve client at ('127.0.0.1', 46073)
+2022-09-08 13:35:23,593 DEBUG    sync           :44       Client Connected [('127.0.0.1', 46073)]
+2022-09-08 13:35:23,593 DEBUG    sync           :202      Handling data: 0x0 0x1 0x0 0x0 0x0 0x6 0x0 0x3 0x0 0x0 0x0 0x1
+2022-09-08 13:35:23,593 DEBUG    socket_framer  :165      Processing: 0x0 0x1 0x0 0x0 0x0 0x6 0x0 0x3 0x0 0x0 0x0 0x1
+2022-09-08 13:35:23,593 DEBUG    factory        :216      Factory Request[ReadHoldingRegistersRequest': 3]
+2022-09-08 13:35:23,593 DEBUG    context        :64       validate: fc-[3] address-1: count-1
+2022-09-08 13:35:23,594 DEBUG    sync           :78       Datastore unable to fulfill request: 'dict' object has no attribute 'validate' Traceback (most recent call last):
+  File "/home/pedro/.local/lib/python3.10/site-packages/pymodbus/server/sync.py", line 69, in execute
+    response = request.execute(context)
+  File "/home/pedro/.local/lib/python3.10/site-packages/pymodbus/register_read_message.py", line 129, in execute
+    if not context.validate(self.function_code, self.address, self.count):
+  File "/home/pedro/.local/lib/python3.10/site-packages/pymodbus/datastore/context.py", line 65, in validate
+    return self.store[self.decode(fc_as_hex)].validate(address, count)
+AttributeError: 'dict' object has no attribute 'validate'
+
+2022-09-08 13:35:23,594 ERROR    pdu            :108      Exception Response(131, 3, SlaveFailure)
+2022-09-08 13:35:23,594 DEBUG    sync           :236      send: [Exception Response(131, 3, SlaveFailure)]- b'000100000003008304'
+2022-09-08 13:35:23,649 DEBUG    sync           :202      Handling data: 
+2022-09-08 13:35:23,650 DEBUG    socket_framer  :165      Processing: 
+2022-09-08 13:35:23,650 DEBUG    sync           :52       Client Disconnected [('127.0.0.1', 46073)]

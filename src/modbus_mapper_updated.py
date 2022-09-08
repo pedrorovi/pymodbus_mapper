@@ -169,14 +169,11 @@ def modbus_context_decoder(mapping_blocks):
         for mapping in block:
             if type(mapping) == dict:
                 value = mapping["value"]
-                print(value)
                 address = mapping["address"]
                 # function = mapping["function"]
                 # blocks[function][address] = value
                 # blocks[address] = value
-                # sparse.setValues(address=0, values=[10] * 5)
                 sparse.setValues(address=int(address), values=int(value))
-                # print(mapping)
     # print(type(blocks))
     # print(blocks)
     # datablocks = ModbusSparseDataBlock(blocks)
@@ -316,13 +313,9 @@ class ModbusTypeDecoder:
         :param value: The type of value to parse
         :returns: The decoder method to use
         """
-        # print(value)
         tokens = self.tokenize(value)
-        # print(tokens)
         token = next(tokens).lower()  # pylint: disable=no-member
-        # print(token)
         parser = self.parsers.get(token, self.default)
-        # print(parser)
         return parser
 
 
@@ -339,4 +332,3 @@ def mapping_decoder(mapping_blocks, decoder=None):
                 mapping["address"] = mapping["address"]
                 mapping["size"] = mapping["size"]
                 mapping["type"] = decoder.parse(mapping["type"])
-                # print(mapping)

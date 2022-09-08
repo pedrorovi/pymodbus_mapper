@@ -326,9 +326,13 @@ def mapping_decoder(mapping_blocks, decoder=None):
     :param decoder: The type decoder to use
     """
     decoder = decoder or ModbusTypeDecoder()
+    map = defaultdict(dict)
     for block in mapping_blocks.items():
         for mapping in block:
             if type(mapping) == dict:
                 mapping["address"] = mapping["address"]
                 mapping["size"] = mapping["size"]
                 mapping["type"] = decoder.parse(mapping["type"])
+                # print(type(mapping))
+                map[mapping["address"]] = mapping
+    return map

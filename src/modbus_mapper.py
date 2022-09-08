@@ -313,3 +313,5 @@ def mapping_decoder(mapping_blocks, decoder=None):
             mapping["address"] = int(mapping["address"])
             mapping["size"] = int(mapping["size"])
             mapping["type"] = decoder.parse(mapping["type"])
+            
+    

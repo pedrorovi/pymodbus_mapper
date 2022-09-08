@@ -17,9 +17,18 @@ template = ["address", "type", "size", "name", "function"]
 
 raw_mapping = csv_mapping_parser("simple_mapping_client.csv", template)
 pprint(raw_mapping)
+# print("\r\n")
 
 mapping = mapping_decoder(raw_mapping)
+# pprint(type(mapping))
+# pprint(mapping)
+
 pprint(mapping)
+# print("\r\n")
+# pprint(mapping.values())
+# print("\r\n")
+# pprint(mapping.get('type'))
+# pprint(mapping.items('type'))
 
 index, size = 0, 2
 client = ModbusTcpClient(host="localhost", port=5020)
@@ -44,10 +53,31 @@ pprint(response)
 decoder = BinaryPayloadDecoder.fromRegisters(
     response.registers, byteorder=Endian.Big, wordorder=Endian.Big
 )
-# print(decoder)
-print(mapping)
-while index < size:
-    # print("[{}]\t{}".format(index, mapping[index]))
 
-    # index += mapping[index]["size"]
-    index += 1
+# print(mapping)
+# while index < size:
+# #     # print("[{}]\t{}".format(index, mapping[index]))
+#         print(decoder.decode_16bit_int())
+# #     # print(decodermapping["type"])
+# #     # index += mapping[index]["size"]
+#         index += 1
+
+# response = client.read_holding_registers(index, size)
+# decoder = BinaryPayloadDecoder.fromRegisters(response.registers)
+
+# print(mapping[1])
+# while index < size:
+#     print(mapping[index])
+#     if "type" in mapping[index]:
+#         print( "[{}]\t{}".format(index, mapping[index]["type"](decoder)))
+#         index += mapping[index]["size"]
+#     else:
+#         index+=1
+
+for block in mapping.items():
+    for mapping in block:
+        if type(mapping) == dict:
+            # print(type(mapping["type"]))
+            # print(mapping["type"])
+            
+            print( "\t{}".format(mapping["type"]()(decoder)))

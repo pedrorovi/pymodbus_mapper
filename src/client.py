@@ -79,5 +79,4 @@ for block in mapping.items():
         if type(mapping) == dict:
             # print(type(mapping["type"]))
             # print(mapping["type"])
-            
-            print( "\t{}".format(mapping["type"]()(decoder)))
+            print( "[{}]\t{}".format(mapping["address"], mapping["type"]()(decoder)))

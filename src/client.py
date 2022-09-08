@@ -21,10 +21,25 @@ pprint(raw_mapping)
 mapping = mapping_decoder(raw_mapping)
 pprint(mapping)
 
-index, size = 0, 1
+index, size = 0, 5
 client = ModbusTcpClient(host="localhost", port=5020)
+
+# print("HR")
+# response = client.write_register(index, 100)
+# pprint(response)
+
+print("HR")
 response = client.read_holding_registers(index, size)
 pprint(response)
+# print("IR")
+# response = client.read_input_registers(index, size)
+# pprint(response)
+# print("CO")
+# response = client.read_coils(index, size)
+# pprint(response)
+# print("DI")
+# response = client.read_discrete_inputs(index, size)
+# pprint(response)
 
 decoder = BinaryPayloadDecoder.fromRegisters(
     response.registers, byteorder=Endian.Big, wordorder=Endian.Big

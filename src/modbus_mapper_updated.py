@@ -55,6 +55,14 @@ from tokenize import generate_tokens
 
 from pymodbus.datastore.context import ModbusSlaveContext
 
+from pymodbus.datastore.store import BaseModbusDataBlock
+
+from pymodbus.datastore import (
+    ModbusSequentialDataBlock,
+    ModbusServerContext,
+    ModbusSlaveContext,
+    ModbusSparseDataBlock,
+)
 
 # --------------------------------------------------------------------------- #
 # raw mapping input parsers
@@ -155,17 +163,27 @@ def modbus_context_decoder(mapping_blocks):
     :returns: The initialized modbus slave context
     """
     blocks = defaultdict(dict)
+    # basemod = BaseModbusDataBlock()
+    sparse = ModbusSparseDataBlock()
+    sparse.create()
     for block in mapping_blocks.items():
         for mapping in block:
             if type(mapping) == dict:
                 value = mapping["value"]
+                print(value)
                 address = mapping["address"]
-                function = mapping["function"]
-                blocks[function][address] = value
-                # blocks[address] = value
+                # function = mapping["function"]
+                # blocks[function][address] = value
+                blocks[address] = value
+                sparse.setValues(1, [10]*5)
                 # print(mapping)
-    return ModbusSlaveContext(**blocks)
-    # return ModbusSlaveContext(di=blocks, co=blocks, hr=blocks, ir=blocks)
+    print(type(blocks))
+    print(blocks)
+    # print(sparse.getValues(1))
+    # datablocks = ModbusSparseDataBlock(blocks)
+    # print(datablocks)
+    return ModbusSlaveContext(hr=sparse)
+    # return ModbusSlaveContext(di=datablocks, co=datablocks, hr=datablocks, ir=datablocks)
 
 
 # --------------------------------------------------------------------------- #
